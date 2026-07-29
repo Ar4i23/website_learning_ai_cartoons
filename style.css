@@ -1,0 +1,1375 @@
+/* ============================================================
+   СБРОС СТИЛЕЙ И БАЗОВЫЕ НАСТРОЙКИ
+   ============================================================ */
+
+/* Сброс margin/padding для всех элементов */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Плавная прокрутка для якорных ссылок */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Базовые стили body */
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background-color: #6b7b5b;
+  color: #ffffff;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ссылки без подчёркивания */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Убираем маркеры списков */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Изображения не выходят за контейнер */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Кнопки без стандартных стилей */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Поля ввода без стандартных стилей */
+input {
+  font-family: inherit;
+  outline: none;
+}
+
+/* ============================================================
+   CSS-ПЕРЕМЕННЫЕ (цветовая палитра макета)
+   ============================================================ */
+:root {
+  /* Основной оливковый фон страницы */
+  --color-bg-page: #6b7b5b;
+  /* Фон hero-wrap и карточек (чуть светлее) */
+  --color-bg-wrap: #7e8e6e;
+  /* Фон карточек внутри секций */
+  --color-bg-card: #8a9a7a;
+  /* Фон карточек при наведении */
+  --color-bg-card-hover: #93a383;
+  /* Жёлтый акцентный цвет (кнопки, иконки) */
+  --color-yellow: #f0d96b;
+  /* Жёлтый при наведении */
+  --color-yellow-hover: #e8cf55;
+  /* Тёмно-зелёный для кнопок CTA */
+  --color-dark-btn: #4a5a3e;
+  /* Тёмно-зелёный при наведении */
+  --color-dark-btn-hover: #3d4a32;
+  /* Белый текст */
+  --color-white: #ffffff;
+  /* Приглушённый белый текст */
+  --color-text-muted: rgba(255, 255, 255, 0.7);
+  /* Полупрозрачный белый */
+  --color-text-dim: rgba(255, 255, 255, 0.5);
+  /* Радиус скругления для больших блоков */
+  --radius-lg: 24px;
+  /* Радиус скругления для карточек */
+  --radius-md: 20px;
+  /* Радиус скругления для кнопок */
+  --radius-btn: 50px;
+  /* Радиус скругления для маленьких элементов */
+  --radius-sm: 14px;
+  /* Тень для карточек */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* Плавность переходов */
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   ОБЩИЙ КОНТЕЙНЕР СТРАНИЦЫ
+   Ограничивает ширину контента и центрирует его
+   ============================================================ */
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ============================================================
+   КНОПКИ (универсальный компонент)
+   ============================================================ */
+
+/* Базовые стили кнопки */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: var(--radius-btn);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition);
+  white-space: nowrap;
+  font-family: "Inter", sans-serif;
+}
+
+/* Текст внутри кнопки */
+.btn__text {
+  line-height: 1;
+}
+
+/* Стрелка внутри кнопки */
+.btn__arrow {
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+/* Анимация стрелки при наведении на кнопку */
+.btn:hover .btn__arrow {
+  transform: translateX(4px);
+}
+
+/* Жёлтая кнопка */
+.btn--yellow {
+  background-color: var(--color-yellow);
+  color: #3d4a32;
+}
+
+.btn--yellow:hover {
+  background-color: var(--color-yellow-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240, 217, 107, 0.3);
+}
+
+/* Прозрачная кнопка с обводкой (ghost) */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-white);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+
+.btn--ghost:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+/* Тёмно-зелёная кнопка */
+.btn--dark {
+  background-color: var(--color-dark-btn);
+  color: var(--color-white);
+}
+
+.btn--dark:hover {
+  background-color: var(--color-dark-btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Маленькая кнопка (для header) */
+.btn--sm {
+  padding: 10px 22px;
+  font-size: 14px;
+}
+
+/* ============================================================
+   BURGER MENU (кнопка бургер-меню)
+   ============================================================ */
+/* ===== БАЗОВЫЕ СТИЛИ БУРГЕРА (скрыт на десктопе) ===== */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 10;
+}
+
+.burger__line {
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+/* ============================================================
+   HERO-WRAP: ОБЪЕДИНЁННАЯ СЕКЦИЯ HEADER + HERO
+   Общий контейнер с оливковым фоном и скруглёнными углами.
+   Содержит навигацию (header) и основной контент первого экрана (hero).
+   Изображение девушки позиционируется абсолютно внутри этого блока.
+   ============================================================ */
+.hero-wrap {
+  background-color: var(--color-bg-wrap);
+  background-image: url("img/ava.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  border-radius: var(--radius-lg);
+
+  padding: 20px 40px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ----- HEADER внутри hero-wrap ----- */
+/* Навигационная панель: меню по центру, кнопка справа */
+.hero-wrap__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 40px;
+}
+
+/* Навигационное меню */
+.hero-wrap__nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+/* Ссылка в навигации */
+.hero-wrap__nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color var(--transition);
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* Подчёркивание активной/наведённой ссылки */
+.hero-wrap__nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-yellow);
+  transition: width var(--transition);
+  border-radius: 1px;
+}
+
+.hero-wrap__nav-link:hover::after,
+.hero-wrap__nav-link--active::after {
+  width: 100%;
+}
+
+.hero-wrap__nav-link:hover,
+.hero-wrap__nav-link--active {
+  color: var(--color-yellow);
+}
+
+/* Кнопка в header */
+.hero-wrap__header-btn {
+  flex-shrink: 0;
+}
+
+/* ----- BODY внутри hero-wrap ----- */
+/* Основной контент: текст слева, изображение справа */
+.hero-wrap__body {
+  gap: 40px;
+  align-items: center;
+  min-height: 520px;
+}
+
+/* ----- CONTENT (левая часть hero) ----- */
+.hero-wrap__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Главный заголовок */
+.hero-wrap__title {
+  font-size: clamp(42px, 5.5vw, 76px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+
+/* Выделенная часть заголовка */
+.hero-wrap__title-highlight {
+  display: block;
+}
+
+/* Подзаголовок */
+.hero-wrap__subtitle {
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 380px;
+}
+
+/* Контейнер кнопок действия */
+.hero-wrap__actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+}
+
+/* Кнопки действия */
+.hero-wrap__action-btn {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+/* ----- FEATURES (4 преимущества с иконками) ----- */
+.hero-wrap__features {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+/* Отдельное преимущество */
+.hero-wrap__feature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* Иконка преимущества */
+.hero-wrap__feature-icon {
+  color: var(--color-yellow);
+  opacity: 0.85;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Текст преимущества */
+.hero-wrap__feature-text {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* ----- IMAGE AREA (правая часть hero) ----- */
+/* Область с изображением девушки и декоративным фоном */
+.hero-wrap__image-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 520px;
+}
+
+/* Круглый декоративный фон за изображением девушки */
+.hero-wrap__image-circle {
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 70%
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* Изображение девушки */
+.hero-wrap__image {
+  position: relative;
+  z-index: 2;
+  max-height: 580px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+}
+
+/* ----- DECO (декоративные элементы) ----- */
+/* Базовые стили для всех декоративных элементов */
+.hero-wrap__deco {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Звёздочка сверху */
+.hero-wrap__deco--star-top {
+  top: 12%;
+  right: 22%;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 18px;
+  animation: decoFloat 3s ease-in-out infinite;
+}
+
+/* Звёздочка посередине */
+.hero-wrap__deco--star-mid {
+  top: 28%;
+  left: 8%;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 14px;
+  animation: decoFloat 4s ease-in-out infinite 1s;
+}
+
+/* Точка 1 */
+.hero-wrap__deco--dot-1 {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  top: 18%;
+  right: 28%;
+}
+
+/* Точка 2 */
+.hero-wrap__deco--dot-2 {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  bottom: 28%;
+  left: 12%;
+}
+
+/* Точка 3 */
+.hero-wrap__deco--dot-3 {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  top: 40%;
+  right: 15%;
+}
+
+/* Волнистая линия */
+.hero-wrap__deco--wave {
+  top: 22%;
+  right: 32%;
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 22px;
+}
+
+/* Анимация парения для декоративных элементов */
+@keyframes decoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ============================================================
+   INFO-ROW: СЕКЦИЯ "ЧТО ТЫ ПОЛУЧИШЬ" + "ПРОГРАММА ОБУЧЕНИЯ"
+   Два блока в ряд с одинаковым стилем карточек
+   ============================================================ */
+.info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Общий блок внутри info-row */
+.info-row__block {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: 32px;
+}
+
+/* Заголовок блока */
+.info-row__block-title {
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+/* ----- CARDS (карточки преимуществ) ----- */
+/* Сетка карточек 2x2 */
+.info-row__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Отдельная карточка */
+.info-row__card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 22px 18px;
+  transition: all var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.info-row__card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+
+/* Иконка карточки */
+.info-row__card-icon {
+  color: var(--color-yellow);
+  opacity: 0.9;
+  margin-bottom: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Заголовок карточки */
+.info-row__card-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+/* Описание карточки */
+.info-row__card-desc {
+  font-size: 12px;
+  color: var(--color-text-dim);
+  line-height: 1.5;
+}
+
+/* ----- MODULE LIST (список модулей программы) ----- */
+.info-row__module-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Отдельный модуль */
+.info-row__module-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: padding-left var(--transition);
+}
+
+.info-row__module-item:last-child {
+  border-bottom: none;
+}
+
+.info-row__module-item:hover {
+  padding-left: 6px;
+}
+
+/* Иконка модуля */
+.info-row__module-icon {
+  color: var(--color-yellow);
+  opacity: 0.85;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(240, 217, 107, 0.12);
+  border-radius: 10px;
+}
+
+/* Название модуля */
+.info-row__module-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Номер модуля */
+.info-row__module-num {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text-dim);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   BOTTOM-ROW: СЕКЦИЯ "КОМУ ПОДОЙДЁТ" + CTA
+   Два блока: аудитория и призыв к действию
+   ============================================================ */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Общий блок внутри bottom-row */
+.bottom-row__block {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: 32px;
+}
+
+/* ----- AUDIENCE (целевая аудитория) ----- */
+/* Шапка блока аудитории */
+.bottom-row__audience-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+/* Жёлтая иконка аудитории */
+.bottom-row__audience-icon {
+  width: 46px;
+  height: 46px;
+  background-color: var(--color-yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Заголовок блока аудитории */
+.bottom-row__audience-title {
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 800;
+}
+
+/* Текст описания аудитории */
+.bottom-row__audience-text {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 380px;
+}
+
+/* Контейнер аватарок */
+.bottom-row__audience-avatars {
+  display: flex;
+  align-items: center;
+}
+
+/* Отдельная аватарка */
+.bottom-row__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--color-bg-card);
+  margin-left: -10px;
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+
+.bottom-row__avatar:first-child {
+  margin-left: 0;
+}
+
+.bottom-row__avatar:hover {
+  transform: translateY(-4px);
+  z-index: 2;
+  position: relative;
+}
+
+.bottom-row__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Счётчик студентов */
+.bottom-row__counter {
+  margin-left: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 62px;
+  height: 62px;
+  flex-shrink: 0;
+}
+
+/* Число в счётчике */
+.bottom-row__counter-num {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-yellow);
+  line-height: 1.2;
+}
+
+/* Подпись счётчика */
+.bottom-row__counter-label {
+  font-size: 9px;
+  color: var(--color-text-dim);
+  line-height: 1.2;
+}
+
+/* ----- CTA (призыв к действию) ----- */
+/* Блок CTA имеет жёлтый фон */
+.bottom-row__block--cta {
+  background-color: var(--color-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Контент CTA (текст + кнопка) */
+.bottom-row__cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 300px;
+}
+
+/* Заголовок CTA */
+.bottom-row__cta-title {
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 800;
+  color: var(--color-dark-btn);
+  margin-bottom: 10px;
+}
+
+/* Текст CTA */
+.bottom-row__cta-text {
+  font-size: 13px;
+  color: rgba(61, 74, 50, 0.7);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+/* Кнопка CTA */
+.bottom-row__cta-btn {
+  padding: 14px 26px;
+  font-size: 15px;
+}
+
+/* Визуальная часть CTA (хлопушка + декор) */
+.bottom-row__cta-visual {
+  position: relative;
+  flex-shrink: 0;
+}
+/* ===== ХЛОПУШКА БЕЗ ОБРЕЗАНИЯ ===== */
+.bottom-row__clapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  /* Убираем overflow: hidden если он был */
+  overflow: visible;
+}
+
+/* SVG должен быть видим за пределами своих границ */
+.clapper-svg {
+  overflow: visible;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Крышка хлопушки */
+.clapper-lid {
+  transform-origin: 15px 50px; /* Точка вращения — шарнир */
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Полоски на крышке */
+.clapper-stripes {
+  transition: opacity 0.3s ease;
+}
+
+/* Эффект при наведении */
+.bottom-row__clapper:hover .clapper-lid {
+  transform: rotate(-25deg);
+}
+
+.bottom-row__clapper:hover .clapper-stripes {
+  opacity: 0.8;
+}
+
+.bottom-row__clapper:hover .clapper-svg {
+  transform: scale(1.05);
+}
+
+/* Эффект при клике */
+.bottom-row__clapper:active .clapper-lid {
+  transform: rotate(-35deg);
+  transition: transform 0.15s ease;
+}
+
+.bottom-row__clapper:active .clapper-svg {
+  transform: scale(0.98);
+}
+
+/* Тень под хлопушкой */
+.bottom-row__clapper::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 10%;
+  width: 80%;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  filter: blur(4px);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.bottom-row__clapper:hover::before {
+  bottom: -8px;
+  opacity: 0.6;
+}
+
+.bottom-row__clapper:hover .clapper-stripes {
+  opacity: 0.8;
+}
+
+.bottom-row__clapper:hover svg {
+  transform: scale(1.05);
+}
+
+/* Эффект "щелчка" при клике */
+.bottom-row__clapper:active .clapper-lid {
+  transform: rotate(-35deg);
+  transition: transform 0.15s ease;
+}
+
+.bottom-row__clapper:active svg {
+  transform: scale(0.98);
+}
+
+/* Тень под хлопушкой для объема */
+.bottom-row__clapper::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 10%;
+  width: 80%;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.bottom-row__clapper:hover::before {
+  bottom: -8px;
+  opacity: 0.6;
+}
+
+/* Декоративные элементы CTA */
+.bottom-row__cta-deco {
+  position: absolute;
+  color: rgba(61, 74, 50, 0.15);
+  pointer-events: none;
+}
+
+.bottom-row__cta-deco--s1 {
+  top: 8%;
+  right: 25%;
+  font-size: 22px;
+}
+
+.bottom-row__cta-deco--s2 {
+  bottom: 15%;
+  right: 8%;
+  font-size: 16px;
+}
+
+.bottom-row__cta-deco--s3 {
+  top: 25%;
+  left: 5%;
+  font-size: 18px;
+}
+
+.bottom-row__cta-deco--s4 {
+  bottom: 8%;
+  left: 15%;
+  font-size: 14px;
+}
+
+/* ============================================================
+   МОДАЛЬНОЕ ОКНО
+   Появляется при клике на кнопку записи
+   ============================================================ */
+
+/* Контейнер модального окна (скрыт по умолчанию) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition);
+}
+
+/* Активное состояние модального окна */
+.modal--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Затемнённый фон модального окна */
+.modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Контент модального окна */
+.modal__box {
+  position: relative;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: 44px 40px;
+  max-width: 420px;
+  width: 90%;
+  transform: translateY(20px) scale(0.97);
+  transition: transform var(--transition);
+}
+
+.modal--active .modal__box {
+  transform: translateY(0) scale(1);
+}
+
+/* Кнопка закрытия модального окна */
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.modal__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Заголовок модального окна */
+.modal__title {
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+/* Форма в модальном окне */
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Поле формы */
+.modal__field {
+  width: 100%;
+}
+
+/* Поле ввода */
+.modal__input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--color-white);
+  font-size: 15px;
+  transition: border-color var(--transition);
+}
+
+.modal__input::placeholder {
+  color: var(--color-text-dim);
+}
+
+.modal__input:focus {
+  border-color: var(--color-yellow);
+}
+
+/* Кнопка отправки формы */
+.modal__submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 6px;
+  padding: 16px;
+  font-size: 16px;
+}
+
+/* ============================================================
+   АДАПТИВНОСТЬ (резиновая вёрстка)
+   ============================================================ */
+
+/* ===== МОБИЛЬНОЕ МЕНЮ (880px и ниже) ===== */
+
+/* Планшеты и небольшие десктопы */
+@media (max-width: 1200px) {
+  .hero-wrap__features {
+    display: flex;
+    gap: 20px;
+  }
+  .hero-wrap__actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 1080px) {
+  /* Создаем слой с размытием поверх фона */
+  .hero-wrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(8px) brightness(0.7);
+    z-index: 0;
+    transition: filter 0.5s ease;
+  }
+
+  /* Контент должен быть выше размытия */
+  .hero-wrap__header,
+  .hero-wrap__body {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-wrap {
+    background-position: center 35%;
+    background-size: cover;
+  }
+  .hero-wrap__header {
+    margin-bottom: 0;
+  }
+  .hero-wrap__feature {
+    align-items: center;
+  }
+  .hero-wrap__body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-wrap__actions {
+    flex-direction: row;
+    align-content: center;
+  }
+  .hero-wrap__title {
+    font-size: 60px;
+    margin-top: 16px;
+  }
+
+  .hero-wrap__body {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-wrap__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-wrap__actions {
+    justify-content: center;
+  }
+
+  .hero-wrap__features {
+    justify-content: center;
+  }
+
+  .hero-wrap__image-area {
+    min-height: 400px;
+  }
+
+  .hero-wrap__image-circle {
+    width: 360px;
+    height: 360px;
+  }
+
+  .hero-wrap__image {
+    max-height: 420px;
+  }
+
+  .info-row,
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .bottom-row__block--cta {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .bottom-row__cta-content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 880px) {
+  /* Показываем бургер */
+  .burger {
+    display: flex;
+  }
+  .hero-wrap {
+    padding: 0 40px 40px;
+  }
+  /* Скрываем обычную навигацию */
+  .hero-wrap__nav {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+    background: rgba(74, 90, 62, 0.98);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 16px 16px;
+    margin: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.35s ease-in-out;
+    z-index: 9;
+  }
+
+  .hero-wrap {
+    position: relative;
+  }
+
+  /* Активное состояние меню */
+  .hero-wrap__nav--active {
+    max-height: 400px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Ссылки меню */
+  .hero-wrap__nav-link {
+    padding: 16px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.2s ease;
+  }
+
+  .hero-wrap__nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .hero-wrap__nav-link:hover,
+  .hero-wrap__nav-link--active {
+    color: #ffe066;
+    background: rgba(255, 224, 102, 0.08);
+  }
+
+  /* Анимация бургера в крестик */
+  .burger--active .burger__line:nth-child(1) {
+    transform: translateY(7.2px) rotate(45deg);
+    background: rgba(255, 255, 255, 1);
+  }
+
+  .burger--active .burger__line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .burger--active .burger__line:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+    background: rgba(255, 255, 255, 1);
+  }
+
+  /* Адаптация хедера */
+  .hero-wrap__header {
+    padding: 16px 20px;
+  }
+
+  .hero-wrap__header-btn {
+    min-width: 120px;
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 13px;
+  }
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+  .page {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .hero-wrap {
+    padding: 0 20px 30px;
+  }
+  .hero-wrap__title {
+    font-size: 50px;
+  }
+
+  .hero-wrap__header {
+    gap: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+  }
+
+  .hero-wrap__nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-wrap__body {
+    min-height: auto;
+    gap: 24px;
+  }
+
+  .hero-wrap__features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .hero-wrap__image-area {
+    min-height: 320px;
+  }
+
+  .hero-wrap__image-circle {
+    width: 280px;
+    height: 280px;
+  }
+
+  .hero-wrap__image {
+    max-height: 340px;
+  }
+
+  .info-row__block,
+  .bottom-row__block {
+    padding: 24px 20px;
+  }
+
+  .info-row__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .bottom-row__audience-text {
+    max-width: 100%;
+  }
+  .hero-wrap__nav {
+    margin: 0 12px;
+  }
+}
+
+/* Маленькие мобильные устройства */
+@media (max-width: 480px) {
+  .hero-wrap {
+    background-size: contain;
+  }
+  .hero-wrap__title {
+    font-size: 35px;
+  }
+  .hero-wrap__subtitle {
+    font-size: 13px;
+  }
+
+  .hero-wrap__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-wrap__action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-wrap__features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .hero-wrap__feature {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-wrap__nav-link {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  .burger__line {
+    width: 22px;
+    height: 2px;
+  }
+
+  .btn {
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+
+  .modal__box {
+    padding: 32px 24px;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 360px) {
+  .hero-wrap__features {
+    grid-template-columns: 1fr;
+  }
+  .hero-wrap__title {
+    font-size: 30px;
+  }
+}

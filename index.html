@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Обучение ИИ-мультикам</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ===== ОБЩИЙ КОНТЕЙНЕР СТРАНИЦЫ ===== -->
+    <div class="page">
+      <!-- ===== СЕКЦИЯ HEADER + HERO (общий wrap) ===== -->
+      <!-- Header и Hero объединены в один блок с общим фоном и border-radius -->
+      <section class="hero-wrap">
+        <!-- ===== HEADER (навигация) ===== -->
+        <!-- Меню навигации с логотипом-текстом и кнопкой записи -->
+        <!-- ===== HEADER (навигация) ===== -->
+        <header class="hero-wrap__header">
+          <nav class="hero-wrap__nav">
+            <a href="#" class="hero-wrap__nav-link hero-wrap__nav-link--active"
+              >Главная</a
+            >
+            <a href="#benefits" class="hero-wrap__nav-link">Программа</a>
+            <a href="#features" class="hero-wrap__nav-link">Преимущества</a>
+            <a href="#reviews" class="hero-wrap__nav-link">Отзывы</a>
+            <a href="#contacts" class="hero-wrap__nav-link">Контакты</a>
+          </nav>
+
+          <!-- Кнопка бургер-меню (видна только на мобильных) -->
+          <button
+            class="burger"
+            id="burgerBtn"
+            aria-label="Открыть меню"
+            aria-expanded="false"
+          >
+            <span class="burger__line"></span>
+            <span class="burger__line"></span>
+            <span class="burger__line"></span>
+          </button>
+
+          <a
+            href="#signup"
+            class="hero-wrap__header-btn btn btn--yellow btn--sm"
+          >
+            <span class="btn__text">Записаться</span>
+            <svg
+              class="btn__arrow"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </header>
+
+        <!-- ===== HERO (основной контент первого экрана) ===== -->
+        <div class="hero-wrap__body">
+          <!-- Левая часть: текст, кнопки, преимущества -->
+          <div class="hero-wrap__content">
+            <h1 class="hero-wrap__title">
+              Обучение<br />
+              <span class="hero-wrap__title-highlight">ИИ-мультикам</span>
+            </h1>
+            <p class="hero-wrap__subtitle">
+              Научись создавать яркие AI-мультики<br />
+              для блога, бизнеса и клиентов
+            </p>
+
+            <!-- Кнопки действия -->
+            <div class="hero-wrap__actions">
+              <a href="#signup" class="hero-wrap__action-btn btn btn--yellow">
+                <span class="btn__text">Записаться</span>
+                <svg
+                  class="btn__arrow"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <a href="#program" class="hero-wrap__action-btn btn btn--ghost">
+                <span class="btn__text">Узнать программу</span>
+                <svg
+                  class="btn__arrow"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+
+            <!-- 4 преимущества с иконками -->
+            <div class="hero-wrap__features">
+              <div class="hero-wrap__feature">
+                <div class="hero-wrap__feature-icon">
+                  <svg
+                    width="36"
+                    height="36"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="4" y="8" width="32" height="24" rx="3" />
+                    <polygon
+                      points="16,16 26,20 16,24"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                    <line x1="4" y1="28" x2="36" y2="28" />
+                  </svg>
+                </div>
+                <span class="hero-wrap__feature-text"
+                  >Практика<br />с первого урока</span
+                >
+              </div>
+              <div class="hero-wrap__feature">
+                <div class="hero-wrap__feature-icon">
+                  <svg
+                    width="36"
+                    height="36"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20 4 L23 14 L33 14 L25 20 L28 30 L20 24 L12 30 L15 20 L7 14 L17 14 Z"
+                    />
+                    <circle
+                      cx="12"
+                      cy="10"
+                      r="1.5"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                    <circle
+                      cx="30"
+                      cy="8"
+                      r="1"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                    <circle
+                      cx="8"
+                      cy="28"
+                      r="1"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                  </svg>
+                </div>
+                <span class="hero-wrap__feature-text"
+                  >Доступ к урокам<br />навсегда</span
+                >
+              </div>
+              <div class="hero-wrap__feature">
+                <div class="hero-wrap__feature-icon">
+                  <svg
+                    width="36"
+                    height="36"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="6" y="6" width="28" height="28" rx="6" />
+                    <polygon
+                      points="17,14 27,20 17,26"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                  </svg>
+                </div>
+                <span class="hero-wrap__feature-text"
+                  >Поддержка<br />и обратная связь</span
+                >
+              </div>
+              <div class="hero-wrap__feature">
+                <div class="hero-wrap__feature-icon">
+                  <svg
+                    width="36"
+                    height="36"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="10" y="4" width="20" height="32" rx="3" />
+                    <line x1="10" y1="10" x2="30" y2="10" />
+                    <line x1="10" y1="30" x2="30" y2="30" />
+                    <circle
+                      cx="20"
+                      cy="34"
+                      r="1.5"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                    <rect
+                      x="14"
+                      y="14"
+                      width="12"
+                      height="12"
+                      rx="1"
+                      opacity="0.3"
+                    />
+                  </svg>
+                </div>
+                <span class="hero-wrap__feature-text"
+                  >Обучение полностью<br />с телефона</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== СЕКЦИЯ: ЧТО ТЫ ПОЛУЧИШЬ + ПРОГРАММА ОБУЧЕНИЯ ===== -->
+      <!-- Два блока в ряд: преимущества курса и программа по модулям -->
+      <section class="info-row" id="features">
+        <!-- Левый блок: что получит студент -->
+        <div class="info-row__block info-row__block--benefits" id="benefits">
+          <h2 class="info-row__block-title">Что ты получишь</h2>
+          <div class="info-row__cards">
+            <div class="info-row__card">
+              <div class="info-row__card-icon">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 44 44"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                >
+                  <line x1="14" y1="12" x2="34" y2="12" />
+                  <line x1="14" y1="22" x2="34" y2="22" />
+                  <line x1="14" y1="32" x2="34" y2="32" />
+                  <circle
+                    cx="10"
+                    cy="12"
+                    r="2.5"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                  <circle
+                    cx="10"
+                    cy="22"
+                    r="2.5"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                  <circle
+                    cx="10"
+                    cy="32"
+                    r="2.5"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </div>
+              <h3 class="info-row__card-title">Пошаговая система</h3>
+              <p class="info-row__card-desc">
+                Полный путь создания AI-видео. От идеи до готовой серии
+              </p>
+            </div>
+            <div class="info-row__card">
+              <div class="info-row__card-icon">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 44 44"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="22" cy="14" r="7" />
+                  <path d="M10 38 C10 28 15 24 22 24 C29 24 34 28 34 38" />
+                </svg>
+              </div>
+              <h3 class="info-row__card-title">Создание персонажей</h3>
+              <p class="info-row__card-desc">
+                Научишься создавать уникальных AI-героев и сцен
+              </p>
+            </div>
+            <div class="info-row__card">
+              <div class="info-row__card-icon">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 44 44"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M14 34 L30 10 L36 16 L20 40 Z" />
+                  <line x1="26" y1="14" x2="32" y2="20" />
+                </svg>
+              </div>
+              <h3 class="info-row__card-title">Сценарии и раскадровки</h3>
+              <p class="info-row__card-desc">
+                Пиши сценарии и создавай кадры как профи
+              </p>
+            </div>
+            <div class="info-row__card">
+              <div class="info-row__card-icon">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 44 44"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="6" y="6" width="32" height="32" rx="3" />
+                  <polygon
+                    points="18,14 30,22 18,30"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                  <line x1="6" y1="34" x2="38" y2="34" />
+                </svg>
+              </div>
+              <h3 class="info-row__card-title">Монтаж и упаковка</h3>
+              <p class="info-row__card-desc">Уроки монтажа в CapCut</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Правый блок: программа обучения по модулям -->
+        <div class="info-row__block info-row__block--program" id="program">
+          <h2 class="info-row__block-title">Программа обучения</h2>
+          <ul class="info-row__module-list">
+            <li class="info-row__module-item">
+              <span class="info-row__module-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M7 7h10M7 12h10M7 17h6" />
+                </svg>
+              </span>
+              <span class="info-row__module-name"
+                >Модуль 1. Основы ИИ-инструментов</span
+              >
+              <span class="info-row__module-num">01</span>
+            </li>
+            <li class="info-row__module-item">
+              <span class="info-row__module-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
+                </svg>
+              </span>
+              <span class="info-row__module-name"
+                >Модуль 2. Создание героев</span
+              >
+              <span class="info-row__module-num">02</span>
+            </li>
+            <li class="info-row__module-item">
+              <span class="info-row__module-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <polygon
+                    points="10,8 16,12 10,16"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </span>
+              <span class="info-row__module-name"
+                >Модуль 3. Сцены и анимация</span
+              >
+              <span class="info-row__module-num">03</span>
+            </li>
+            <li class="info-row__module-item">
+              <span class="info-row__module-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="4" y="2" width="16" height="20" rx="2" />
+                  <line x1="8" y1="6" x2="16" y2="6" />
+                  <line x1="8" y1="10" x2="16" y2="10" />
+                  <line x1="8" y1="14" x2="12" y2="14" />
+                </svg>
+              </span>
+              <span class="info-row__module-name"
+                >Модуль 4. Продвижение и монетизация</span
+              >
+              <span class="info-row__module-num">04</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== СЕКЦИЯ: КОМУ ПОДОЙДЁТ + CTA ===== -->
+      <section class="bottom-row" id="contacts">
+        <!-- Левый блок: Целевая аудитория (теперь в виде карточек, как "Что ты получишь") -->
+        <div class="info-row__block info-row__block--audience" id="audience">
+          <h2 class="info-row__block-title">Кому подойдёт</h2>
+          <div class="info-row__cards">
+            <!-- Карточка 1: Блогерам -->
+            <div class="info-row__card">
+              <div class="info-row__card-icon">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 44 44"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="6" y="10" width="32" height="20" rx="3" />
+                  <path d="M14 34h16" />
+                  <path d="M22 30v4" />
+                  <circle cx="22" cy="20" r="4" />
+                </svg>
+              </div>
+              <h3 class="info-row__card-title">Блогерам и авторам</h3>
+              <p class="info-row__card-desc">
+                Создавай уникальный вирусный контент для соцсетей и привлекай
+                новую аудиторию
+              </p>
+            </div>
+
+            <!-- Карточка 2: SMM и маркетологам -->
+            <div class="info-row__card">
+              <div class="info-row__card-icon">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 44 44"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="16" cy="16" r="6" />
+                  <path d="M6 36c0-5 4-9 10-9s10 4 10 9" />
+                  <circle cx="30" cy="14" r="5" />
+                  <path d="M30 24c4 0 8 3 8 8" />
+                </svg>
+              </div>
+              <h3 class="info-row__card-title">SMM и маркетологам</h3>
+              <p class="info-row__card-desc">
+                Предлагай клиентам современный формат рекламы и повышай
+                вовлеченность
+              </p>
+            </div>
+
+            <!-- Карточка 3: Экспертам и коучам -->
+            <div class="info-row__card">
+              <div class="info-row__card-icon">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 44 44"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="22" cy="16" r="8" />
+                  <path d="M12 24 L8 36 L22 30 L36 36 L32 24" />
+                  <circle
+                    cx="22"
+                    cy="16"
+                    r="3"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </div>
+              <h3 class="info-row__card-title">Экспертам и коучам</h3>
+              <p class="info-row__card-desc">
+                Упаковывай свои знания в яркие, запоминающиеся и понятные
+                видео-форматы
+              </p>
+            </div>
+
+            <!-- Карточка 4: Тем, кто хочет заработать -->
+            <div class="info-row__card">
+              <div class="info-row__card-icon">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 44 44"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="8" y="14" width="28" height="22" rx="3" />
+                  <path d="M16 14V10a6 6 0 0 1 12 0v4" />
+                  <line x1="8" y1="22" x2="36" y2="22" />
+                  <circle
+                    cx="22"
+                    cy="26"
+                    r="2"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </div>
+              <h3 class="info-row__card-title">Тем, кто хочет заработать</h3>
+              <p class="info-row__card-desc">
+                Освой востребованную профессию и начни брать заказы на создание
+                ИИ-мультиков
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Правый блок: призыв к действию (CTA) -->
+        <div class="bottom-row__block bottom-row__block--cta" id="signup">
+          <div class="bottom-row__cta-content">
+            <h2 class="bottom-row__cta-title">Начни уже сейчас</h2>
+            <p class="bottom-row__cta-text">
+              Освой создание ИИ-мультиков и преврати навык в востребованную
+              услугу
+            </p>
+            <a
+              href="#"
+              class="bottom-row__cta-btn btn btn--dark"
+              id="openModal"
+            >
+              <span class="btn__text">Оставить заявку</span>
+              <svg
+                class="btn__arrow"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+          <div class="bottom-row__cta-visual">
+            <!-- Декоративные звёздочки -->
+            <span class="bottom-row__cta-deco bottom-row__cta-deco--s1">✦</span>
+            <span class="bottom-row__cta-deco bottom-row__cta-deco--s2">✧</span>
+            <span class="bottom-row__cta-deco bottom-row__cta-deco--s3">+</span>
+            <span class="bottom-row__cta-deco bottom-row__cta-deco--s4">✦</span>
+            <!-- Иконка хлопушки -->
+            <div class="bottom-row__clapper">
+              <svg
+                class="clapper-svg"
+                width="160"
+                height="140"
+                viewBox="-30 -50 220 220"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                overflow="visible"
+              >
+                <!-- Основание хлопушки (нижняя часть) -->
+                <g class="clapper-base">
+                  <rect
+                    x="10"
+                    y="50"
+                    width="140"
+                    height="80"
+                    rx="6"
+                    fill="#4A5A3E"
+                    stroke="#3A4A2E"
+                    stroke-width="1.5"
+                  />
+                  <rect
+                    x="15"
+                    y="55"
+                    width="130"
+                    height="70"
+                    rx="4"
+                    fill="#5A6A4E"
+                    opacity="0.3"
+                  />
+
+                  <!-- Круг с треугольником -->
+                  <circle cx="80" cy="90" r="22" fill="white" opacity="0.95" />
+                  <polygon points="73,80 90,90 73,100" fill="#4A5A3E" />
+
+                  <!-- Декоративная линия -->
+                  <line
+                    x1="20"
+                    y1="115"
+                    x2="140"
+                    y2="115"
+                    stroke="#3A4A2E"
+                    stroke-width="1"
+                    opacity="0.5"
+                  />
+                </g>
+
+                <!-- Крышка хлопушки (анимируется) -->
+                <g class="clapper-lid">
+                  <rect
+                    x="10"
+                    y="15"
+                    width="140"
+                    height="35"
+                    rx="4"
+                    fill="#4A5A3E"
+                    stroke="#3A4A2E"
+                    stroke-width="1.5"
+                  />
+                  <rect
+                    x="15"
+                    y="18"
+                    width="130"
+                    height="29"
+                    rx="3"
+                    fill="#5A6A4E"
+                    opacity="0.3"
+                  />
+
+                  <!-- Полоски на крышке -->
+                  <g class="clapper-stripes">
+                    <polygon
+                      points="25,15 40,15 35,50 20,50"
+                      fill="white"
+                      opacity="0.9"
+                    />
+                    <polygon
+                      points="50,15 65,15 60,50 45,50"
+                      fill="white"
+                      opacity="0.9"
+                    />
+                    <polygon
+                      points="75,15 90,15 85,50 70,50"
+                      fill="white"
+                      opacity="0.9"
+                    />
+                    <polygon
+                      points="100,15 115,15 110,50 95,50"
+                      fill="white"
+                      opacity="0.9"
+                    />
+                    <polygon
+                      points="125,15 140,15 135,50 120,50"
+                      fill="white"
+                      opacity="0.9"
+                    />
+                  </g>
+
+                  <!-- Шарнир -->
+                  <circle cx="15" cy="50" r="4" fill="#3A4A2E" />
+                  <circle cx="15" cy="50" r="2" fill="#6A7A5E" />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ЗАПИСИ ===== -->
+    <div class="modal" id="modal">
+      <div class="modal__overlay"></div>
+      <div class="modal__box">
+        <button class="modal__close" aria-label="Закрыть модальное окно">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <h2 class="modal__title">Записаться на курс</h2>
+        <form class="modal__form" id="signupForm">
+          <div class="modal__field">
+            <input
+              type="text"
+              class="modal__input"
+              placeholder="Ваше имя"
+              required
+            />
+          </div>
+          <div class="modal__field">
+            <input
+              type="email"
+              class="modal__input"
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div class="modal__field">
+            <input
+              type="tel"
+              class="modal__input"
+              placeholder="Телефон"
+              required
+            />
+          </div>
+          <button type="submit" class="modal__submit btn btn--yellow">
+            <span class="btn__text">Отправить заявку</span>
+            <svg
+              class="btn__arrow"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
