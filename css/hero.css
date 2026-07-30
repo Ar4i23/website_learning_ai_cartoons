@@ -1,0 +1,218 @@
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero-wrap {
+  background-color: var(--color-bg-wrap);
+  background-image: url("../img/ava.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  border-radius: var(--radius-lg);
+  padding: 20px 40px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-wrap__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 40px;
+}
+.hero-wrap__nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+.hero-wrap__nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color var(--transition);
+  position: relative;
+  padding-bottom: 4px;
+}
+.hero-wrap__nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-yellow);
+  transition: width var(--transition);
+  border-radius: 1px;
+}
+.hero-wrap__nav-link:hover::after,
+.hero-wrap__nav-link--active::after {
+  width: 100%;
+}
+.hero-wrap__nav-link:hover,
+.hero-wrap__nav-link--active {
+  color: var(--color-yellow);
+}
+.hero-wrap__header-btn {
+  flex-shrink: 0;
+}
+
+.hero-wrap__body {
+  gap: 40px;
+  align-items: center;
+  min-height: 520px;
+}
+.hero-wrap__content {
+  position: relative;
+  z-index: 2;
+}
+.hero-wrap__title {
+  font-size: clamp(42px, 5.5vw, 76px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+.hero-wrap__title-highlight {
+  display: block;
+}
+.hero-wrap__subtitle {
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 380px;
+}
+.hero-wrap__actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+}
+.hero-wrap__action-btn {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+.hero-wrap__features {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.hero-wrap__feature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.hero-wrap__feature-icon {
+  color: var(--color-yellow);
+  opacity: 0.85;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-wrap__feature-text {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.hero-wrap__image-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 520px;
+}
+.hero-wrap__image-circle {
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 70%
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.hero-wrap__image {
+  position: relative;
+  z-index: 2;
+  max-height: 580px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+}
+
+.hero-wrap__deco {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-wrap__deco--star-top {
+  top: 12%;
+  right: 22%;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 18px;
+  animation: decoFloat 3s ease-in-out infinite;
+}
+.hero-wrap__deco--star-mid {
+  top: 28%;
+  left: 8%;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 14px;
+  animation: decoFloat 4s ease-in-out infinite 1s;
+}
+.hero-wrap__deco--dot-1 {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  top: 18%;
+  right: 28%;
+}
+.hero-wrap__deco--dot-2 {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  bottom: 28%;
+  left: 12%;
+}
+.hero-wrap__deco--dot-3 {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  top: 40%;
+  right: 15%;
+}
+.hero-wrap__deco--wave {
+  top: 22%;
+  right: 32%;
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 22px;
+}
+
+@keyframes decoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
