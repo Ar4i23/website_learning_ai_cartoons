@@ -94,3 +94,84 @@
   color: var(--color-text-dim);
   flex-shrink: 0;
 }
+
+/* ============================================================
+   СЕКЦИЯ БОНУСОВ (дополнительные стили)
+   ============================================================ */
+.bonuses-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Отступ от предыдущей секции */
+}
+
+.info-row__block--bonuses {
+  width: 100%;
+  max-width: 800px; /* Делает список компактным и удобным для чтения */
+}
+
+/* Убираем нижнюю границу у последнего элемента в бонусах */
+.info-row__block--bonuses .info-row__module-item:last-child {
+  border-bottom: none;
+}
+/* ============================================================
+   MODULE SLIDER (свайп-эффект дляProgram и Бонусов)
+   ============================================================ */
+
+/* Контейнер слайдера */
+.module-slider {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Viewport - окно просмотра с фиксированной высотой (4 элемента) */
+.module-slider__viewport {
+  overflow: hidden;
+  height: 280px; /* Высота 4 элементов */
+  position: relative;
+}
+
+/* Список элементов - будет сдвигаться */
+.module-slider__viewport .info-row__module-list {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Сдвиг вверх на высоту 4 элементов */
+.module-slider__viewport .info-row__module-list.shifted-up {
+  transform: translateY(-280px);
+}
+
+/* Кнопка слайдера - центрирована */
+.module-slider__btn {
+  display: block;
+  margin: 0 auto;
+  min-width: 200px;
+}
+
+/* Поворот стрелки при активном состоянии */
+.module-slider__btn.is-active .btn__arrow {
+  transform: rotate(180deg);
+}
+
+/* ============================================================
+   СЕКЦИЯ БОНУСОВ (полная ширина, центрированный контент)
+   ============================================================ */
+
+.bonuses-section {
+  width: 100%;
+  padding: 40px 20px;
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-md);
+}
+
+.bonuses-section__container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.bonuses-section__title {
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 32px;
+}

@@ -6,4 +6,5 @@
 @import "info-row.css";
 @import "bottom-row.css";
 @import "modal.css";
+@import "bonuses.css"; /* <-- Добавлено */
 @import "responsive.css";
