@@ -110,7 +110,16 @@
   font-size: 13px;
   color: rgba(61, 74, 50, 0.7);
   line-height: 1.6;
-  margin-bottom: 22px;
+  margin-bottom: 10px;
+}
+.bottom-row__cta-price {
+  font-size: 50px;
+  font-weight: 800;
+  color: var(--color-dark-btn);
+}
+.bottom-row__cta-price strong {
+  font-size: 30px;
+  font-weight: 800;
 }
 .bottom-row__cta-btn {
   padding: 14px 26px;

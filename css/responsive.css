@@ -172,12 +172,14 @@
 
   /* CTA */
   .bottom-row__block--cta {
-    flex-direction: column;
     text-align: center;
     gap: 20px;
   }
   .bottom-row__cta-content {
+    display: flex;
     max-width: 100%;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -267,6 +269,9 @@
   /* Audience */
   .bottom-row__audience-text {
     max-width: 100%;
+  }
+  .bottom-row__block--cta {
+    flex-direction: column;
   }
 
   /* Bonuses section */
