@@ -1,0 +1,165 @@
+/* ============================================================
+   СЕКЦИЯ БОНУСОВ (креативный дизайн с карточками)
+   ============================================================ */
+
+.bonuses-section {
+  width: 100%;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #7e8e6e 0%, #8a9a7a 50%, #7e8e6e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Декоративные элементы фона */
+.bonuses-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(240, 217, 107, 0.1) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bonuses-section::after {
+  content: "";
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bonuses-section__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Заголовок секции */
+.bonuses-section__title {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* ============================================================
+   BONUSES SLIDER (свайп-эффект для карточек)
+   ============================================================ */
+
+.bonuses-slider {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+/* Viewport - окно просмотра с фиксированной высотой (4 карточки = 2 ряда) */
+.bonuses-slider__viewport {
+  overflow: hidden;
+  height: 420px; /* Высота 2 рядов карточек */
+  position: relative;
+}
+
+/* Track - контейнер карточек, который будет сдвигаться */
+.bonuses-slider__track {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Сдвиг вверх на высоту viewport */
+.bonuses-slider__track.shifted-up {
+  transform: translateY(-420px);
+}
+
+/* ============================================================
+   БОНУСНАЯ КАРТОЧКА
+   ============================================================ */
+
+.bonus-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 28px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 190px;
+}
+
+.bonus-card:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: rgba(240, 217, 107, 0.3);
+}
+
+/* Иконка карточки (SVG) */
+.bonus-card__icon {
+  color: var(--color-yellow);
+  opacity: 0.9;
+  margin-bottom: 16px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.bonus-card:hover .bonus-card__icon {
+  transform: scale(1.1);
+}
+
+/* Заголовок карточки */
+.bonus-card__title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+/* Описание карточки */
+.bonus-card__desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   КНОПКА СЛАЙДЕРА БОНУСОВ (использует стандартные стили btn--ghost)
+   ============================================================ */
+
+.bonuses-slider__btn {
+  display: block;
+  margin: 0 auto;
+  min-width: 200px; /* Фиксируем минимальную ширину как в программе обучения */
+  white-space: nowrap; /* Запрещаем перенос текста */
+}
+
+/* Поворот стрелки при активном состоянии */
+.bonuses-slider__btn.is-active .btn__arrow {
+  transform: rotate(180deg);
+}
