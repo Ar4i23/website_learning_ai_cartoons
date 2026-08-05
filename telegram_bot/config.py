@@ -27,5 +27,5 @@ SUPPORT_USERNAME = os.getenv("SUPPORT_USERNAME", "support")
 ADMIN_ID = int(os.getenv("ADMIN_ID", 0))
 
 # ЮKassa
-YOOKASSA_SHOP_ID = os.getenv("YOOKASSA_SHOP_ID", "")
+YOOKASSA_SHOP_ID = os.getenv("YOOKASSA_SHOP_ID", "1426552")
 YOOKASSA_SECRET_KEY = os.getenv("YOOKASSA_SECRET_KEY", "")
