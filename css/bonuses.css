@@ -69,8 +69,11 @@
 
 /* Viewport - окно просмотра с фиксированной высотой (4 карточки = 2 ряда) */
 .bonuses-slider__viewport {
+  box-sizing: border-box;
   overflow: hidden;
-  height: 420px; /* Высота 2 рядов карточек */
+  height: 430px; /* 420px контента + 10px воздуха сверху */
+  padding-top: 10px; /* буфер, в который карточка поднимается при hover */
+  margin-top: -10px; /* компенсация, чтобы секция не сдвинулась */
   position: relative;
 }
 
