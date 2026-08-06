@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://frolicking-licorice-b661ff.netlify.app/sitemap.xml
