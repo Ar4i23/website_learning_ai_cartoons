@@ -3,7 +3,7 @@
 Лендинг курса «Обучение ИИ-мультикам» + Telegram-бот, который принимает оплату
 через ЮKassa и автоматически выдаёт доступ к курсу после подтверждения платежа.
 
-🌐 **Сайт:** https://frolicking-licorice-b661ff.netlify.app
+🌐 **Сайт:** https://antonovaai.ru/
 🤖 **Бот:** [@antonovaai_multiki_bot](https://t.me/antonovaai_multiki_bot)
 
 ## ✨ Что умеет проект
