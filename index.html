@@ -11,10 +11,9 @@
       name="description"
       content="Научись создавать яркие AI-мультики для блога, бизнеса и клиентов. 7 уроков + бонусы. Онлайн-курс с поддержкой в Telegram."
     />
-    <meta
-      name="keywords"
-      content="ИИ мультики, AI мультипликация, курс создания мультиков, ChatGPT мультики, Grok мультики, CapCut анимация, AI видео"
-    />
+    <!-- META KEYWORDS [УДАЛЕНО]: Google не учитывает keywords с ~2009 года,
+         Яндекс — тоже. Это мёртвый груз, ключевые слова теперь работают
+         через тексты на странице и заголовки -->
     <meta name="author" content="Виктория Антонова" />
 
     <!-- Open Graph (для соцсетей) -->
@@ -24,6 +23,8 @@
       property="og:description"
       content="Научись создавать яркие AI-мультики для блога, бизнеса и клиентов. 7 уроков + бонусы."
     />
+    <!-- OG:IMAGE [ВРЕМЕННО]: вернули ava.png. Для идеального превью в соцсетях
+         позже сделаем горизонтальную обложку 1200×630 -->
     <meta property="og:image" content="https://antonovaai.ru/img/ava.png" />
     <meta property="og:url" content="https://antonovaai.ru" />
     <meta property="og:site_name" content="Обучение ИИ-мультикам" />
@@ -38,9 +39,15 @@
     />
     <meta name="twitter:image" content="https://antonovaai.ru/img/ava.png" />
 
-    <!-- Favicon -->
+    <!-- FAVICON [ОБНОВЛЕНО]: используем сжатую версию favicon.png (371 КБ вместо
+         1763 КБ). Для iPhone/iPad оставлен apple-touch-icon.png -->
     <link rel="icon" type="image/png" href="img/favicon.png" />
     <link rel="apple-touch-icon" href="img/favicon.png" />
+
+    <!-- CANONICAL [ДОБАВЛЕНО]: говорит поисковикам, что главная версия страницы —
+         одна. Без него antonovaai.ru и antonovaai.ru/index.html могли считаться
+         дублями и делить позиции -->
+    <link rel="canonical" href="https://antonovaai.ru/" />
 
     <!-- Стили -->
     <link rel="stylesheet" href="css/style.css" />
@@ -48,6 +55,70 @@
     <!-- Предзагрузка шрифтов (если есть) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- ============================================================
+         JSON-LD [ДОБАВЛЕНО]: структурированные данные для поисковиков.
+         Даёт Google расширенный сниппет (название курса, провайдер,
+         блок FAQ прямо в выдаче) → выше кликабельность
+         ============================================================ -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "Обучение ИИ-мультикам",
+        "description": "Онлайн-курс создания анимационных мультиков с помощью нейросетей: сценарий, персонажи, промты, анимация в Grok, монтаж в CapCut. 7 уроков и 7 бонусов.",
+        "provider": {
+          "@type": "Person",
+          "name": "Виктория Антонова",
+          "sameAs": "https://antonovaai.ru"
+        },
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "online",
+          "courseWorkload": "PT7H"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Нужен ли опыт в мультипликации или дизайне?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Нет. Курс построен от нуля: от идеи и сценария до готового мультфильма. Все инструменты доступны с телефона."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Какие программы нужны для курса?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "ChatGPT, Grok и CapCut. На старте есть урок по подготовке: какие приложения и подписки понадобятся."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Сколько длится обучение?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "7 уроков пошаговой программы плюс 7 бонусных материалов. Проходите в своём темпе, доступ сохраняется."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Можно ли зарабатывать на ИИ-мультиках?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Да: заказы от блогеров и бизнеса, контент для своих соцсетей, продажа готовых роликов. В курсе есть разбор монетизации."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
 
   <body>

@@ -1,4 +1,3 @@
-import { initForm } from "./form.js";
 import { initSmoothScroll } from "./smooth-scroll.js";
 import { initActiveNav } from "./active-nav.js";
 import { initScrollAnim } from "./scroll-anim.js";
@@ -7,7 +6,6 @@ import { initModuleSlider } from "./module-slider.js";
 import { initBonusesSlider } from "./bonuses-slider.js"; // <-- Добавлено
 
 document.addEventListener("DOMContentLoaded", function () {
-  initForm();
   initSmoothScroll();
   initActiveNav();
   initScrollAnim();
