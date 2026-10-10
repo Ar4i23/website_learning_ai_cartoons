@@ -39,10 +39,9 @@
     />
     <meta name="twitter:image" content="https://antonovaai.ru/img/ava.png" />
 
-    <!-- FAVICON [ОБНОВЛЕНО]: используем сжатую версию favicon.png (371 КБ вместо
-         1763 КБ). Для iPhone/iPad оставлен apple-touch-icon.png -->
+    <!-- Иконки сайта -->
     <link rel="icon" type="image/png" href="img/favicon.png" />
-    <link rel="apple-touch-icon" href="img/favicon.png" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
 
     <!-- CANONICAL [ДОБАВЛЕНО]: говорит поисковикам, что главная версия страницы —
          одна. Без него antonovaai.ru и antonovaai.ru/index.html могли считаться
@@ -52,9 +51,13 @@
     <!-- Стили -->
     <link rel="stylesheet" href="css/style.css" />
 
-    <!-- Предзагрузка шрифтов (если есть) -->
+    <!-- Шрифт Inter используется в стилях сайта -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- ============================================================
          JSON-LD [ДОБАВЛЕНО]: структурированные данные для поисковиков.
@@ -131,7 +134,7 @@
         <!-- Меню навигации с логотипом-текстом и кнопкой записи -->
         <!-- ===== HEADER (навигация) ===== -->
         <header class="hero-wrap__header">
-          <nav class="hero-wrap__nav">
+          <nav class="hero-wrap__nav" id="siteNav" aria-label="Основная навигация">
             <a href="#" class="hero-wrap__nav-link hero-wrap__nav-link--active"
               >Главная</a
             >
@@ -152,6 +155,7 @@
             class="burger"
             id="burgerBtn"
             aria-label="Открыть меню"
+            aria-controls="siteNav"
             aria-expanded="false"
           >
             <span class="burger__line"></span>
@@ -676,6 +680,8 @@
           <button
             class="module-slider__btn btn btn--ghost"
             data-slider-btn="programList"
+            aria-controls="programList"
+            aria-expanded="false"
           >
             <span class="btn__text">Показать еще</span>
             <svg
@@ -894,6 +900,8 @@
           <button
             class="bonuses-slider__btn btn btn--ghost"
             data-bonuses-btn="bonusList"
+            aria-controls="bonusList"
+            aria-expanded="false"
           >
             <span class="btn__text">Показать еще</span>
             <svg

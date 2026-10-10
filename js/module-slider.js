@@ -1,79 +1,83 @@
-/**
- * ============================================================
- * МОДУЛЬ: MODULE SLIDER (постраничная прокрутка)
- * Отвечает за: вертикальную прокрутку элементов в секциях
- * "Программа обучения". Прокручивает по одной "странице" за раз,
- * пока не достигнет конца, затем меняет кнопку на "Скрыть".
- * ============================================================
- */
-
 export function initModuleSlider() {
-  const sliders = document.querySelectorAll(".module-slider");
-
-  sliders.forEach((slider) => {
+  document.querySelectorAll(".module-slider").forEach((slider) => {
     const sliderId = slider.getAttribute("data-slider");
     const viewport = slider.querySelector(".module-slider__viewport");
-    const list = viewport.querySelector(".info-row__module-list");
-    const btn = document.querySelector(`[data-slider-btn="${sliderId}"]`);
-    const btnText = btn ? btn.querySelector(".btn__text") : null;
+    const list = viewport?.querySelector(".info-row__module-list");
+    const btn = slider.parentElement.querySelector(
+      '[data-slider-btn="' + sliderId + '"]',
+    );
+    const btnText = btn?.querySelector(".btn__text");
 
-    if (!list || !btn || !btnText) return;
+    if (!viewport || !list || !btn || !btnText) return;
 
     let currentPage = 0;
-    let totalPages = 0;
+    let pageOffsets = [0];
 
-    // Вычисляем количество страниц
     function calculatePages() {
-      const items = list.querySelectorAll(".info-row__module-item");
-      const viewportHeight = viewport.offsetHeight;
-      const itemHeight = items[0] ? items[0].offsetHeight : 0;
-      const itemsPerPage = Math.floor(viewportHeight / itemHeight);
-      totalPages = Math.ceil(items.length / itemsPerPage);
-      return { itemsPerPage, itemHeight };
+      const items = Array.from(list.querySelectorAll(".info-row__module-item"));
+      const viewportHeight = viewport.clientHeight;
+      const firstItemTop = items[0]?.offsetTop ?? 0;
+      const itemOffsets = items.map((item) => item.offsetTop - firstItemTop);
+
+      pageOffsets = [0];
+      let startIndex = 0;
+      while (startIndex < items.length) {
+        const pageEnd = itemOffsets[startIndex] + viewportHeight;
+        let nextStart = startIndex + 1;
+        while (
+          nextStart < items.length &&
+          itemOffsets[nextStart] + items[nextStart].offsetHeight <= pageEnd
+        ) {
+          nextStart++;
+        }
+        if (nextStart >= items.length) break;
+        pageOffsets.push(itemOffsets[nextStart]);
+        startIndex = nextStart;
+      }
+
+      if (currentPage >= pageOffsets.length) {
+        currentPage = pageOffsets.length - 1;
+      }
     }
 
-    // Обновляем позицию списка
     function updatePosition() {
-      const { itemHeight, itemsPerPage } = calculatePages();
-      const offset = currentPage * itemsPerPage * itemHeight;
-      list.style.transform = `translateY(-${offset}px)`;
+      calculatePages();
+      list.style.transform = "translateY(-" + pageOffsets[currentPage] + "px)";
 
-      // Обновляем текст кнопки
-      if (currentPage === 0) {
-        btnText.textContent = "Показать еще";
-        btn.classList.remove("is-active");
-      } else if (currentPage >= totalPages - 1) {
-        btnText.textContent = "Скрыть";
-        btn.classList.add("is-active");
-      } else {
-        btnText.textContent = "Показать еще";
-        btn.classList.remove("is-active");
-      }
+      const items = Array.from(list.querySelectorAll(".info-row__module-item"));
+      const firstItemTop = items[0]?.offsetTop ?? 0;
+      const pageStart = pageOffsets[currentPage] ?? 0;
+      const pageEnd = pageStart + viewport.clientHeight;
+
+      items.forEach((item) => {
+        const itemTop = item.offsetTop - firstItemTop;
+        const fullyVisible =
+          itemTop >= pageStart &&
+          itemTop + item.offsetHeight <= pageEnd;
+        item.style.visibility = fullyVisible ? "" : "hidden";
+      });
+
+      const isExpanded = currentPage > 0;
+      btnText.textContent =
+        currentPage === pageOffsets.length - 1 && isExpanded
+          ? "Скрыть"
+          : "Показать еще";
+      btn.classList.toggle("is-active", isExpanded);
+      btn.setAttribute("aria-expanded", String(isExpanded));
     }
 
-    // Обработчик клика на кнопку
     btn.addEventListener("click", () => {
-      if (currentPage < totalPages - 1) {
-        // Прокрутка вниз
-        currentPage++;
-      } else {
-        // Возврат в начало
-        currentPage = 0;
-      }
+      currentPage =
+        currentPage < pageOffsets.length - 1 ? currentPage + 1 : 0;
       updatePosition();
     });
 
-    // Инициализация при загрузке
-    calculatePages();
     updatePosition();
 
-    // Обновляем при изменении размера окна
-    window.addEventListener("resize", () => {
-      calculatePages();
-      if (currentPage >= totalPages) {
-        currentPage = totalPages - 1;
-      }
-      updatePosition();
-    });
+    window.addEventListener("resize", updatePosition);
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(updatePosition);
+    }
   });
 }

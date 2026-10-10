@@ -5,6 +5,5 @@
 @import "hero.css";
 @import "info-row.css";
 @import "bottom-row.css";
-/* modal.css [УДАЛЕНО]: модальных окон на сайте нет */
 @import "bonuses.css"; /* <-- Добавлено */
 @import "responsive.css";

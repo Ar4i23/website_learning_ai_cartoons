@@ -1,4 +1,8 @@
 export function initSmoothScroll() {
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -12,7 +16,10 @@ export function initSmoothScroll() {
           window.pageYOffset -
           headerHeight -
           20;
-        window.scrollTo({ top: targetPosition, behavior: "smooth" });
+        window.scrollTo({
+          top: targetPosition,
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+        });
       }
     });
   });

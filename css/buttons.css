@@ -12,6 +12,12 @@
   white-space: nowrap;
   font-family: "Inter", sans-serif;
 }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
 .btn__text {
   line-height: 1;
 }

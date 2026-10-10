@@ -2,21 +2,21 @@ export function initBurgerMenu() {
   const burgerBtn = document.getElementById("burgerBtn");
   const nav = document.querySelector(".hero-wrap__nav");
   const header = document.querySelector(".hero-wrap__header");
-  if (!burgerBtn || !nav) return;
+  if (!burgerBtn || !nav || !header) return;
 
   // Создаем оверлей динамически, если его нет
   let overlay = document.querySelector(".hero-wrap__overlay");
   if (!overlay) {
     overlay = document.createElement("div");
     overlay.className = "hero-wrap__overlay";
-    // Вставляем сразу после header
-    header.parentNode.insertBefore(overlay, header.nextSibling);
+    document.body.append(overlay);
   }
 
   function openMenu() {
     nav.classList.add("hero-wrap__nav--active");
     burgerBtn.classList.add("burger--active");
     overlay.classList.add("hero-wrap__overlay--active");
+    burgerBtn.setAttribute("aria-label", "Закрыть меню");
     burgerBtn.setAttribute("aria-expanded", "true");
     document.body.style.overflow = "hidden";
   }
@@ -25,6 +25,7 @@ export function initBurgerMenu() {
     nav.classList.remove("hero-wrap__nav--active");
     burgerBtn.classList.remove("burger--active");
     overlay.classList.remove("hero-wrap__overlay--active");
+    burgerBtn.setAttribute("aria-label", "Открыть меню");
     burgerBtn.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
   }
@@ -48,6 +49,12 @@ export function initBurgerMenu() {
       e.key === "Escape" &&
       nav.classList.contains("hero-wrap__nav--active")
     ) {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 1080 && nav.classList.contains("hero-wrap__nav--active")) {
       closeMenu();
     }
   });

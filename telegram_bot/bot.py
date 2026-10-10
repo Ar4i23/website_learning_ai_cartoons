@@ -4,9 +4,8 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from aiogram.fsm.storage.memory import MemoryStorage
 
-from config import BOT_TOKEN
+from config import BOT_TOKEN, validate_config
 from handlers import router
 
 # Настройка логирования
@@ -17,10 +16,11 @@ async def main():
     """
     Главная функция бота
     """
+    validate_config()
+
     # Создаем бота и диспетчер
     bot = Bot(token=BOT_TOKEN)
-    storage = MemoryStorage()
-    dp = Dispatcher(storage=storage)
+    dp = Dispatcher()
     
     # Регистрируем роутер с обработчиками
     dp.include_router(router)

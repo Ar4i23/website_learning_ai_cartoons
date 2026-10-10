@@ -5,6 +5,14 @@
 
 /* ===== 1200px ===== */
 @media (max-width: 1200px) {
+  .hero-wrap__content {
+    max-width: 560px;
+  }
+
+  .hero-wrap__features {
+    max-width: 520px;
+  }
+
   /* Hero - Actions */
   .hero-wrap__actions {
     flex-direction: column;
@@ -33,7 +41,7 @@
     right: 0;
     bottom: 0;
     background: inherit;
-    filter: blur(8px) brightness(0.7);
+    filter: blur(8px) brightness(0.55);
     z-index: 0;
     transition: filter 0.5s ease;
   }
@@ -64,7 +72,7 @@
     opacity: 0;
     transform: translateY(-10px);
     transition: all 0.35s ease-in-out;
-    z-index: 100;
+    z-index: 1001;
     pointer-events: none;
   }
   .hero-wrap__nav--active {
@@ -110,6 +118,8 @@
 
   /* Hero - Header button */
   .hero-wrap__header-btn {
+    position: relative;
+    z-index: 2;
     min-width: 120px;
     min-height: 40px;
     padding: 0 16px;
@@ -121,8 +131,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 1fr;
     text-align: center;
+  }
+
+  .hero-wrap__content {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .hero-wrap__features {
+    max-width: 700px;
+    margin: 0 auto;
   }
 
   /* Hero - Title */
@@ -152,18 +171,6 @@
   /* Hero - Features */
   .hero-wrap__features {
     justify-content: center;
-  }
-
-  /* Hero - Image area (если используется) */
-  .hero-wrap__image-area {
-    min-height: 400px;
-  }
-  .hero-wrap__image-circle {
-    width: 360px;
-    height: 360px;
-  }
-  .hero-wrap__image {
-    max-height: 420px;
   }
 
   /* Info-row и Bottom-row — одна колонка */
@@ -239,18 +246,6 @@
     gap: 20px;
   }
 
-  /* Hero - Image area */
-  .hero-wrap__image-area {
-    min-height: 320px;
-  }
-  .hero-wrap__image-circle {
-    width: 280px;
-    height: 280px;
-  }
-  .hero-wrap__image {
-    max-height: 340px;
-  }
-
   /* Info-row и Bottom-row - блоки */
   .info-row__block,
   .bottom-row__block {
@@ -266,15 +261,6 @@
   .module-slider__viewport {
     height: 240px;
   }
-  .module-slider__viewport .info-row__module-list.shifted-up {
-    transform: translateY(-240px);
-  }
-
-  /* Bottom-row - Audience */
-  .bottom-row__audience-text {
-    max-width: 100%;
-  }
-
   /* Bottom-row - CTA */
   .bottom-row__block--cta {
     flex-direction: column;
@@ -290,12 +276,8 @@
 
   /* Bonuses slider */
   .bonuses-slider__viewport {
-    height: 370px;
+    height: 430px;
   }
-  .bonuses-slider__track.shifted-up {
-    transform: translateY(-380px);
-  }
-
   /* Bonus card */
   .bonus-card {
     padding: 24px 20px;
@@ -317,15 +299,16 @@
 @media (max-width: 600px) {
   /* Bonuses slider — одна колонка */
   .bonuses-slider__track {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .bonus-card:last-child:nth-child(odd) {
+    grid-column: auto;
+    width: auto;
+    justify-self: stretch;
   }
   .bonuses-slider__viewport {
     height: 360px;
   }
-  .bonuses-slider__track.shifted-up {
-    transform: translateY(-360px);
-  }
-
   /* Bonus card */
   .bonus-card {
     min-height: 160px;
@@ -334,11 +317,6 @@
 
 /* ===== 480px ===== */
 @media (max-width: 480px) {
-  /* Hero-wrap (контейнер) */
-  .hero-wrap {
-    background-size: contain;
-  }
-
   /* Hero - Title */
   .hero-wrap__title {
     font-size: 35px;
@@ -383,17 +361,9 @@
     font-size: 14px;
   }
 
-  /* Modal */
-  .modal__box {
-    padding: 32px 24px;
-  }
-
   /* Module slider */
   .module-slider__viewport {
     height: 200px;
-  }
-  .module-slider__viewport .info-row__module-list.shifted-up {
-    transform: translateY(-200px);
   }
   .module-slider__btn {
     min-width: 180px;
@@ -409,10 +379,6 @@
   .bonuses-slider__viewport {
     height: 330px;
   }
-  .bonuses-slider__track.shifted-up {
-    transform: translateY(-320px);
-  }
-
   /* Bonus card */
   .bonus-card {
     padding: 20px 16px;

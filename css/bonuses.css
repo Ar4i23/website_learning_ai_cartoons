@@ -44,6 +44,7 @@
 }
 
 .bonuses-section__container {
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
@@ -80,17 +81,21 @@
 /* Track - контейнер карточек, который будет сдвигаться */
 .bonuses-slider__track {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
+  align-items: stretch;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
-/* Сдвиг вверх на высоту viewport */
-.bonuses-slider__track.shifted-up {
-  transform: translateY(-420px);
+/* Center the final card when the grid contains an odd number of bonuses. */
+.bonus-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  width: calc((100% - 20px) / 2);
+  justify-self: center;
 }
 
+/* Сдвиг вверх на высоту viewport */
 /* ============================================================
    БОНУСНАЯ КАРТОЧКА
    ============================================================ */

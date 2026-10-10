@@ -10,8 +10,8 @@ def get_start_keyboard() -> InlineKeyboardMarkup:
     ])
 
 
-def get_question_keyboard(support_username: str) -> InlineKeyboardMarkup:
+def get_question_keyboard(support_username: str, payment_id: str) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="💬 Написать в поддержку", url=f"https://t.me/{support_username}")],
-        [InlineKeyboardButton(text="🔙 Назад к оплате", callback_data="back_to_payment")],
+        [InlineKeyboardButton(text="🔙 Назад к оплате", callback_data=f"back_to_payment:{payment_id}")],
     ])

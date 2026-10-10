@@ -15,7 +15,7 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  background-color: #6b7b5b;
+  background-color: var(--color-bg-page);
   color: #ffffff;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -42,4 +42,19 @@ button {
 input {
   font-family: inherit;
   outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

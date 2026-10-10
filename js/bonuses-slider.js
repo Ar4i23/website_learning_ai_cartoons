@@ -1,93 +1,100 @@
-/**
- * ============================================================
- * МОДУЛЬ: BONUSES SLIDER (постраничная прокрутка)
- * Отвечает за: вертикальную прокрутку карточек бонусов.
- * Прокручивает по одной "странице" за раз, пока не достигнет
- * конца, затем меняет кнопку на "Скрыть".
- * ============================================================
- */
-
 export function initBonusesSlider() {
-  const sliders = document.querySelectorAll("[data-bonuses-slider]");
-
-  sliders.forEach((slider) => {
+  document.querySelectorAll("[data-bonuses-slider]").forEach((slider) => {
     const sliderId = slider.getAttribute("data-bonuses-slider");
     const viewport = slider.querySelector(".bonuses-slider__viewport");
     const track = slider.querySelector(".bonuses-slider__track");
-    const btn = document.querySelector(`[data-bonuses-btn="${sliderId}"]`);
-    const btnText = btn ? btn.querySelector(".btn__text") : null;
+    const btn = slider.parentElement.querySelector(
+      '[data-bonuses-btn="' + sliderId + '"]',
+    );
+    const btnText = btn?.querySelector(".btn__text");
 
-    if (!track || !btn || !btnText) return;
+    if (!viewport || !track || !btn || !btnText) return;
 
     let currentPage = 0;
-    let totalPages = 0;
+    let pageOffsets = [0];
 
-    // Вычисляем количество страниц
     function calculatePages() {
-      const cards = track.querySelectorAll(".bonus-card");
-      const viewportHeight = viewport.offsetHeight;
+      const cards = Array.from(track.querySelectorAll(".bonus-card"));
+      const firstCardTop = cards[0]?.offsetTop ?? 0;
+      const rows = [];
+      const style = window.getComputedStyle(viewport);
+      const verticalPadding =
+        parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+      const visibleHeight = Math.max(1, viewport.clientHeight - verticalPadding);
 
-      // Определяем количество карточек в видимой области
-      // Для десктопа: 2x2 = 4 карточки
-      // Для мобильных: 2x1 = 2 карточки
-      const cardHeight = cards[0] ? cards[0].offsetHeight : 0;
-      const gap = 20; // gap из CSS
-      const rowHeight = cardHeight + gap;
-      const rowsPerPage = Math.floor(viewportHeight / rowHeight);
+      cards.forEach((card) => {
+        const rowOffset = card.offsetTop - firstCardTop;
+        const currentRow = rows[rows.length - 1];
+        if (!currentRow || rowOffset !== currentRow.offset) {
+          rows.push({ offset: rowOffset, height: card.offsetHeight });
+        } else {
+          currentRow.height = Math.max(currentRow.height, card.offsetHeight);
+        }
+      });
 
-      // Определяем количество колонок
-      const trackWidth = track.offsetWidth;
-      const cardWidth = cards[0] ? cards[0].offsetWidth : 0;
-      const colsPerPage = Math.floor((trackWidth + gap) / (cardWidth + gap));
+      pageOffsets = [0];
+      let rowIndex = 0;
+      while (rowIndex < rows.length) {
+        const pageEnd = rows[rowIndex].offset + visibleHeight;
+        let nextRow = rowIndex + 1;
+        while (
+          nextRow < rows.length &&
+          rows[nextRow].offset + rows[nextRow].height <= pageEnd
+        ) {
+          nextRow++;
+        }
+        if (nextRow >= rows.length) break;
+        pageOffsets.push(rows[nextRow].offset);
+        rowIndex = nextRow;
+      }
 
-      const cardsPerPage = rowsPerPage * colsPerPage;
-      totalPages = Math.ceil(cards.length / cardsPerPage);
-
-      return { cardsPerPage, rowHeight, rowsPerPage };
+      if (currentPage >= pageOffsets.length) {
+        currentPage = pageOffsets.length - 1;
+      }
     }
 
-    // Обновляем позицию трека
     function updatePosition() {
-      const { rowHeight, rowsPerPage } = calculatePages();
-      const offset = currentPage * rowsPerPage * rowHeight;
-      track.style.transform = `translateY(-${offset}px)`;
+      calculatePages();
+      track.style.transform = "translateY(-" + pageOffsets[currentPage] + "px)";
 
-      // Обновляем текст кнопки
-      if (currentPage === 0) {
-        btnText.textContent = "Показать еще";
-        btn.classList.remove("is-active");
-      } else if (currentPage >= totalPages - 1) {
-        btnText.textContent = "Скрыть";
-        btn.classList.add("is-active");
-      } else {
-        btnText.textContent = "Показать еще";
-        btn.classList.remove("is-active");
-      }
+      const cards = Array.from(track.querySelectorAll(".bonus-card"));
+      const firstCardTop = cards[0]?.offsetTop ?? 0;
+      const viewportStyle = window.getComputedStyle(viewport);
+      const verticalPadding =
+        parseFloat(viewportStyle.paddingTop) +
+        parseFloat(viewportStyle.paddingBottom);
+      const visibleHeight = Math.max(1, viewport.clientHeight - verticalPadding);
+      const pageStart = pageOffsets[currentPage] ?? 0;
+
+      cards.forEach((card) => {
+        const cardTop = card.offsetTop - firstCardTop;
+        const fullyVisible =
+          cardTop >= pageStart &&
+          cardTop + card.offsetHeight <= pageStart + visibleHeight;
+        card.style.visibility = fullyVisible ? "" : "hidden";
+      });
+
+      const isExpanded = currentPage > 0;
+      btnText.textContent =
+        currentPage === pageOffsets.length - 1 && isExpanded
+          ? "Скрыть"
+          : "Показать еще";
+      btn.classList.toggle("is-active", isExpanded);
+      btn.setAttribute("aria-expanded", String(isExpanded));
     }
 
-    // Обработчик клика на кнопку
     btn.addEventListener("click", () => {
-      if (currentPage < totalPages - 1) {
-        // Прокрутка вниз
-        currentPage++;
-      } else {
-        // Возврат в начало
-        currentPage = 0;
-      }
+      currentPage =
+        currentPage < pageOffsets.length - 1 ? currentPage + 1 : 0;
       updatePosition();
     });
 
-    // Инициализация при загрузке
-    calculatePages();
     updatePosition();
+    window.addEventListener("resize", updatePosition);
 
-    // Обновляем при изменении размера окна
-    window.addEventListener("resize", () => {
-      calculatePages();
-      if (currentPage >= totalPages) {
-        currentPage = totalPages - 1;
-      }
-      updatePosition();
-    });
+    // Recalculate after web fonts settle, since text wrapping changes card heights.
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(updatePosition);
+    }
   });
 }

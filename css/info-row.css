@@ -27,7 +27,7 @@
   border: 1px solid rgba(255, 255, 255, 0.04);
 }
 .info-row__card:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--color-bg-card-hover);
   transform: translateY(-3px);
   box-shadow: var(--shadow-card);
 }
@@ -85,6 +85,7 @@
 }
 .info-row__module-name {
   flex: 1;
+  min-width: 0;
   font-size: 14px;
   font-weight: 500;
 }
@@ -104,15 +105,6 @@
   margin-top: 20px; /* Отступ от предыдущей секции */
 }
 
-.info-row__block--bonuses {
-  width: 100%;
-  max-width: 800px; /* Делает список компактным и удобным для чтения */
-}
-
-/* Убираем нижнюю границу у последнего элемента в бонусах */
-.info-row__block--bonuses .info-row__module-item:last-child {
-  border-bottom: none;
-}
 /* ============================================================
    MODULE SLIDER (свайп-эффект дляProgram и Бонусов)
    ============================================================ */
@@ -137,10 +129,6 @@
 }
 
 /* Сдвиг вверх на высоту 4 элементов */
-.module-slider__viewport .info-row__module-list.shifted-up {
-  transform: translateY(-280px);
-}
-
 /* Кнопка слайдера - центрирована */
 .module-slider__btn {
   display: block;
