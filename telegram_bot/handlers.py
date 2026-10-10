@@ -1,7 +1,7 @@
 """Handlers for the course bot."""
 
 import logging
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from typing import Any, Dict
 
 from aiogram import F, Router
@@ -43,6 +43,20 @@ def payment_keyboard(payment_url: str, payment_id: str) -> InlineKeyboardMarkup:
 async def _payment_belongs_to_user(payment: Dict[str, Any], user_id: int) -> bool:
     metadata = payment.get("metadata") or {}
     return metadata.get("telegram_user_id") == str(user_id)
+
+
+def _payment_amount_matches(payment: Dict[str, Any], expected_amount: str) -> bool:
+    amount_data = payment.get("amount")
+    if not isinstance(amount_data, dict) or amount_data.get("currency") != "RUB":
+        return False
+
+    try:
+        actual = Decimal(str(amount_data.get("value")))
+        expected = Decimal(expected_amount).quantize(Decimal("0.01"))
+    except (InvalidOperation, TypeError, ValueError):
+        return False
+
+    return actual.is_finite() and actual == expected
 
 
 @router.message(CommandStart())
@@ -114,11 +128,40 @@ async def callback_paid(callback: CallbackQuery) -> None:
 
     status = payment.get("status")
     if status == "succeeded":
-        await callback.message.edit_text(
-            COURSE_ACCESS_MESSAGE.format(course_link=COURSE_LINK),
-            parse_mode="HTML",
-        )
-        await callback.answer("🎉 Оплата подтверждена!", show_alert=True)
+        if not _payment_amount_matches(payment, PRICE):
+            await callback.answer(
+                "Платёж найден, но его сумма не совпадает с действующей ценой. "
+                f"Не оплачивайте повторно и напишите в поддержку: @{SUPPORT_USERNAME}.",
+                show_alert=True,
+            )
+            return
+
+        access_message = COURSE_ACCESS_MESSAGE.format(course_link=COURSE_LINK)
+        try:
+            await callback.message.edit_text(access_message, parse_mode="HTML")
+        except Exception:
+            logging.exception("Could not edit the payment message with course access")
+            try:
+                await callback.bot.send_message(
+                    chat_id=callback.from_user.id,
+                    text=access_message,
+                    parse_mode="HTML",
+                )
+            except Exception:
+                logging.exception("Could not send course access as a fallback message")
+                await callback.answer(
+                    "Оплата подтверждена, но ссылка не отправилась. "
+                    f"Напишите в поддержку: @{SUPPORT_USERNAME}.",
+                    show_alert=True,
+                )
+                return
+
+            await callback.answer(
+                "🎉 Оплата подтверждена! Ссылка отправлена отдельным сообщением.",
+                show_alert=True,
+            )
+        else:
+            await callback.answer("🎉 Оплата подтверждена!", show_alert=True)
     elif status == "pending":
         await callback.answer(
             "Оплата ещё не прошла. Если вы только что оплатили — подождите минуту и нажмите ещё раз.",
